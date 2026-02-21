@@ -1,0 +1,68 @@
+<div class="max-w-4xl mx-auto mt-12 mb-12">
+    <div class="bg-white shadow-lg rounded-2xl border border-gray-200 overflow-hidden">
+        <div class="px-8 py-6 border-b border-gray-100 from-gray-50 to-white flex justify-between items-center">
+            <div>
+                <h3 class="text-2xl font-bold text-gray-900 tracking-tight">Informe de Misión</h3>
+                <p class="text-sm text-gray-500 mt-1">Detalles oficiales del registro de vuelo</p>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Misión</label>
+                        <p class="mt-1 text-lg font-semibold text-indigo-600">
+                            {{ bitacora?.mision }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Operador a Cargo</label>
+                        <div class="mt-1 flex items-center">
+                            <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                <span class="text-xs font-bold text-gray-600">OP</span>
+                            </div>
+                            <p class="text-gray-700 font-medium">{{ bitacora?.operador }}</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Ubicación / Lugar</label>
+                        <p class="mt-1 text-gray-700 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            {{ bitacora?.lugar }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest">Total Despegues</label>
+                        <div class="mt-2 flex items-baseline">
+                            <span class="text-4xl font-extrabold text-gray-900">{{ bitacora?.despegues }}</span>
+                            <span class="ml-2 text-sm text-gray-500 font-medium">operaciones</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Observaciones Técnicas</label>
+                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                            <p class="text-sm text-gray-600 leading-relaxed italic">
+                                "{{ bitacora?.observaciones || 'Sin observaciones registradas para esta misión.' }}"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end">
+            <button class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
+                Descargar PDF →
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<header class="relative bg-gray-900 bg-center bg-cover" style="background-image: url('/images/dron-hero.jpg');">
+
+    <div class="absolute inset-0 bg-black/50"></div>
+
+    <div class="container relative z-10 px-6 mx-auto">
+        <div class="flex flex-col items-center py-6 lg:h-[36rem] lg:flex-row">
+            <div class="lg:w-1/2">
+
+
+                <h2 class="mt-2 text-4xl font-semibold text-gray-100">
+                    <span class="text-blue-400">UAS</span>
+                </h2>
+
+                <p class="mt-4 text-gray-100">
+                    Unmanned Aircraft System (Sistema de Aeronave No Tripulada)
+                </p>
+            </div>
+
+            <div class="flex mt-8 lg:w-1/2 lg:justify-end lg:mt-0">
+                <div class="w-full max-w-md bg-neutral-600/50 rounded-lg dark:bg-gray-800 shadow-2xl">
+                    <div class="px-6 py-8 text-center">
+                        <h2 class="text-2xl font-semibold text-gray-100 dark:text-white">Ingrese sus Credenciales</h2>
+
+                        <form action="#" (ngSubmit)="iniciarSesion()">
+                            <div class="mt-4">
+
+                                <input [(ngModel)]="email" name="email"
+                                    class="block w-full px-4 py-2 mt-4 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+                                    type="email" placeholder="name@correo.com" aria-label="Email address">
+
+                                <input [(ngModel)]="password" name="password"
+                                    class="block w-full px-4 py-2 mt-4 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring"
+                                    type="password" placeholder="••••••••" aria-label="text">
+                            </div>
+
+                            <div class="flex items-center justify-between mt-4">
+                                <a href=""
+                                    class="text-sm text-gray-100 dark:text-gray-200 hover:underline">Olvidaste tu contraseña?</a>
+
+                                <button type="submit"
+                                    class="px-6 py-2 font-medium text-white transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                                    Ingresar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

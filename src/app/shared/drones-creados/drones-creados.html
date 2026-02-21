@@ -1,0 +1,98 @@
+<div class="max-w-4xl mx-auto bg-white shadow-sm rounded-xl border border-gray-200 overflow-hidden">
+    <div class="bg-slate-700 px-8 py-4">
+        <h2 class="text-base/7 font-semibold text-white uppercase tracking-wide">Información del Dron</h2>
+    </div>
+
+    <div class="p-8">
+        <div class="border-b border-gray-900/10 pb-8">
+            <div class="flex items-center gap-x-4">
+                <div class="h-12 w-12 flex-none rounded-full bg-indigo-50 flex items-center justify-center">
+                    <svg class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm/6 font-medium text-gray-500 uppercase tracking-wider">Modelo del Dron</p>
+                    <p class="text-xl font-bold text-gray-900">{{dron?.modelo}}</p>
+                </div>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-3">
+                <div class="rounded-md bg-gray-50 px-3 py-2 border border-gray-200">
+                    <p class="text-xs font-bold text-gray-500 uppercase">Serie</p>
+                    <p class="text-sm font-mono text-gray-900">{{dron?.serie}}</p>
+                </div>
+                <div class="rounded-md bg-gray-50 px-3 py-2 border border-gray-200">
+                    <p class="text-xs font-bold text-gray-500 uppercase">Baterías 1</p>
+                    <p class="text-sm text-gray-900">{{dron?.b1}}</p>
+                </div>
+                <div class="rounded-md bg-gray-50 px-3 py-2 border border-gray-200">
+                    <p class="text-xs font-bold text-gray-500 uppercase">Baterías 2</p>
+                    <p class="text-sm text-gray-900">{{dron?.b2}}</p>
+                </div>
+                <div class="rounded-md bg-gray-50 px-3 py-2 border border-gray-200">
+                    <p class="text-xs font-bold text-gray-500 uppercase">Baterías 3</p>
+                    <p class="text-sm text-gray-900">{{dron?.b3}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-10 divide-y divide-gray-900/10">
+
+            <div class="pt-8 p-5">
+                <fieldset>
+                    <legend class="text-sm/6 font-semibold text-gray-900">Estado de Disponibilidad</legend>
+                    <div class="mt-6 flex items-center gap-x-8">
+
+
+                        <div class="flex items-center gap-x-3">
+                            <input id="status-disponible" name="estado-{{dron?.id}}" type="radio"
+                                [checked]="dron?.estado === true" (change)="actualizarEstado(true)"
+                                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                            <label for="status-disponible"
+                                class="block text-sm/6 font-medium text-gray-900">Disponible</label>
+                        </div>
+
+                        <div class="flex items-center gap-x-3">
+                            <input id="status-noDisponible" name="estado-{{dron?.id}}" type="radio"
+                                [checked]="dron?.estado === false" (change)="actualizarEstado(false)"
+                                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                            <label for="status-noDisponible" class="block text-sm/6 font-medium text-gray-900">En
+                                Operaciones</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+        </div>
+
+        <div class="mt-10 rounded-md bg-blue-50 p-4 border border-blue-200">
+            <div class="flex">
+                <div class="shrink-0">
+                    <svg class="size-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-blue-700">
+                        Este dron está actualmente <span class="font-bold">
+                            {{dron?.estado ? 'listo para despegar' :
+                            'en una misión activa'}}.</span>
+                    </p>
+                </div>
+
+                
+            </div>
+            
+        </div>
+        
+        <button (click)="eliminarDron(dron?.id!)"
+                class="mt-4 w-full rounded-xl bg-red-800 px-4 py-2.5 text-sm font-bold text-white shadow-md hover:bg-slate-700 active:scale-95 transition-all">
+                Eliminar
+            </button>
+    </div>
+</div>

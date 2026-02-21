@@ -1,0 +1,114 @@
+<div class="min-h-screen bg-slate-50 p-4 lg:p-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <aside class="lg:col-span-4 space-y-6">
+            
+            <div class="bg-white p-4 shadow-sm rounded-2xl border border-slate-200 flex gap-3">
+                <button (click)="setVista('crear')"
+                    class="flex-1 flex items-center justify-center gap-x-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-md hover:bg-indigo-700 active:scale-95 transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    Nuevo Dron
+                </button>
+
+                <button (click)="setVista('actualizar')"
+                    class="flex-1 flex items-center justify-center gap-x-2 rounded-xl bg-slate-800 px-4 py-2.5 text-xs font-bold text-white shadow-md hover:bg-slate-700 active:scale-95 transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    Actualizar
+                </button>
+            </div>
+
+            <div class="bg-white p-6 shadow-md rounded-2xl border border-slate-200">
+                <div class="mb-4">
+                    <h2 class="text-lg font-bold text-slate-800">Panel de Control</h2>
+                    <p class="text-xs text-slate-500">Seleccione un equipo para ver detalles.</p>
+                </div>
+
+                <ul class="space-y-2">
+                    @for (item of drones; track item.id) {
+                    <li (click)="seleccionarDron(item)"
+                        class="flex justify-between items-center p-3 rounded-xl border border-slate-100 cursor-pointer transition-all group hover:border-indigo-300 hover:bg-indigo-50/50"
+                        [class.border-indigo-500]="dronSeleccionado?.id === item.id"
+                        [class.bg-indigo-50]="dronSeleccionado?.id === item.id">
+
+                        <div class="flex flex-col">
+                            <span class="text-sm font-semibold text-slate-700 group-hover:text-indigo-600">
+                                {{ item.modelo }}
+                            </span>
+                            <span class="text-[10px] text-slate-400 font-mono">{{ item.serie || 'S/N' }}</span>
+                        </div>
+
+                        <span class="text-[10px] bg-white text-slate-500 px-2 py-1 rounded-lg border group-hover:border-indigo-200 group-hover:text-indigo-600 uppercase font-bold">
+                            Detalles
+                        </span>
+                    </li>
+                    } @empty {
+                    <div class="text-center py-6">
+                        <p class="text-slate-400 text-sm italic">No hay drones registrados.</p>
+                    </div>
+                    }
+                </ul>
+            </div>
+        </aside>
+
+        <main class="lg:col-span-8">
+            @if (dronSeleccionado) {
+            <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+                <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-widest">Ficha Técnica del Equipo</h3>
+                    <button (click)="dronSeleccionado = undefined" class="text-slate-400 hover:text-red-500 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+                <div class="p-8">
+                    <app-drones-creados [dron]="dronSeleccionado"></app-drones-creados>
+                </div>
+
+                <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end">
+                    <button (click)="dronSeleccionado = undefined"
+                        class="px-6 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors uppercase">
+                        Finalizar Revisión
+                    </button>
+                </div>
+            </div>
+            } @else {
+            <div class="h-full min-h-[400px] border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center p-10 text-slate-400 bg-white/50">
+                <div class="bg-slate-100 p-4 rounded-full mb-4">
+                    <svg class="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                </div>
+                <p class="text-center italic max-w-xs">Seleccione un dron del listado lateral para visualizar su información detallada</p>
+            </div>
+            }
+        </main>
+
+    </div>
+
+    @if (vistaActual !== 'cerrado') {
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
+        
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl animate-in zoom-in-95 duration-300 relative">
+            
+            <div class="sticky top-0 bg-white px-8 py-5 border-b border-slate-100 flex justify-between items-center z-10">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800">
+                        {{ vistaActual === 'actualizar' ? 'Actualizar Dron' : 'Registro de Aeronave' }}
+                    </h3>
+                    <p class="text-xs text-slate-500 italic">Complete los campos técnicos a continuación</p>
+                </div>
+                <button (click)="vistaActual = 'cerrado'" class="p-2 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-full transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <div class="p-8">
+                <app-creacion-dron 
+                    [listaDrones]="drones" 
+                    [soloActualizar]="vistaActual === 'actualizar'"
+                    (finalizado)="vistaActual = 'cerrado'; obtenerDrones()">
+                </app-creacion-dron>
+            </div>
+        </div>
+        
+    </div>
+    }
+</div>
