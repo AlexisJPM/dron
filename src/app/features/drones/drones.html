@@ -24,7 +24,7 @@
                 </div>
 
                 <ul class="space-y-2">
-                    @for (item of drones; track item.id) {
+                    @for (item of drones(); track item.id) {
                     <li (click)="seleccionarDron(item)"
                         class="flex justify-between items-center p-3 rounded-xl border border-slate-100 cursor-pointer transition-all group hover:border-indigo-300 hover:bg-indigo-50/50"
                         [class.border-indigo-500]="dronSeleccionado?.id === item.id"
@@ -102,7 +102,7 @@
 
             <div class="p-8">
                 <app-creacion-dron 
-                    [listaDrones]="drones" 
+                    [listaDrones]="drones()" 
                     [soloActualizar]="vistaActual === 'actualizar'"
                     (finalizado)="vistaActual = 'cerrado'; obtenerDrones()">
                 </app-creacion-dron>

@@ -16,8 +16,6 @@ export class CreacionDron {
   @Input() listaDrones: Dron[] = []; // Recibe los drones del padre
   @Input() soloActualizar: boolean = false;
 
-  @Output() onCerrar = new EventEmitter<void>();
-  @Output() onGuardado = new EventEmitter<void>();
   @Output() finalizado = new EventEmitter<void>();
 
   
@@ -36,10 +34,6 @@ export class CreacionDron {
     estado:true,
   };
 
-  ngOnInit() {
-    //Carga los drones existentes para el selector
-    this.servicioDron.getDrones().subscribe(data => this.listaDrones = data);
-  }
 
   cargarDronParaEditar(event: any) {
     const id = event.target.value;

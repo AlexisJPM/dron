@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { DronesCreados } from "../../shared/drones-creados/drones-creados";
 import { CreacionDron } from '../../shared/creacion-dron/creacion-dron';
 import { Dron } from '../../models/drones';
@@ -14,9 +14,8 @@ export class Drones {
 
   private dronService = inject(DronService);
 
-  drones: Dron[] = []; 
+  drones = signal<Dron[]>([])
   dronSeleccionado?: Dron;
-
   vistaActual: 'cerrado' | 'crear' | 'actualizar' = 'cerrado';
 
   ngOnInit() {
@@ -25,7 +24,7 @@ export class Drones {
 
   obtenerDrones() {
     this.dronService.getDrones().subscribe((data) => {
-      this.drones = data;
+      this.drones.set(data);
     });
   }
 
