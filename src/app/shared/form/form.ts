@@ -27,12 +27,30 @@ export class Form {
     observaciones: '',
   };
 
-  idEdicion = false;
-
   ngOnInit() {
     this.obtenerDrones();
     this.obtenerBitacoras();
   }
+
+  tieneCambiosSinGuardar(): boolean {
+    // Verificamos si algún campo tiene valor
+    const tieneDatos =
+      this.nuevaBitacora.dron !== '' ||
+      this.nuevaBitacora.mision !== '' ||
+      this.nuevaBitacora.operador !== '' ||
+      this.nuevaBitacora.lugar !== '' ||
+      this.nuevaBitacora.observaciones !== '';
+
+    if (tieneDatos) {
+      return confirm('Tienes un registro de bitácora en curso. ¿Deseas descartar los cambios y salir?');
+    }
+
+    return true;
+  }
+
+  idEdicion = false;
+
+
 
   obtenerDrones() {
     this.servicioDrones.getDrones().subscribe({
@@ -40,7 +58,7 @@ export class Form {
     });
   }
 
-  
+
   obtenerBitacoras() {
     this.servicioBitacora.getBitacoras().subscribe(datosBitacora => {
       this.listaDeBitacoras.set(datosBitacora)
@@ -51,7 +69,7 @@ export class Form {
     if (this.idEdicion && this.nuevaBitacora.id) {
       this.servicioBitacora.putBitacora(this.nuevaBitacora.id, this.nuevaBitacora).subscribe(() => {
         this.obtenerBitacoras();
-        this.resetear(); 
+        this.resetear();
       });
     } else {
       this.servicioBitacora.postBitacoras(this.nuevaBitacora).subscribe(() => {

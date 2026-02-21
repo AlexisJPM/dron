@@ -13,6 +13,7 @@ export const canMatchGuard: CanMatchFn = (route, segments) => {
     return true;
   }
   // Si no coincide, devuelve false. 
-  return router.navigate(['/']);
+  return  false;
+  //return router.navigate(['/']);
   
 };

@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Form } from '../../shared/form/form';
-import { misDrones } from '../../models/drones';
 
 @Component({
   selector: 'app-bitacora',
@@ -9,12 +8,14 @@ import { misDrones } from '../../models/drones';
   styleUrl: './bitacora.css',
 })
 export class Bitacora {
+  
+  // Obtenemos la referencia del componente hijo
+  @ViewChild(Form) formularioHijo!: Form;
 
- listaDrones: misDrones[] = [
-    { id: 1, modelo: "DJI MATRICE 300 RTK" },
-    { id: 2, modelo: "DJI MAVIC 3 ENTERPRISE" },
-    { id: 3, modelo: "dji03" }
-  ];
+  // Llamará el Guard
+  tieneCambiosSinGuardar(): boolean {
+    return this.formularioHijo ? this.formularioHijo.tieneCambiosSinGuardar() : true;
+  }
+
+  
 }
-
-
